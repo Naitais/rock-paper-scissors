@@ -8,29 +8,35 @@
 </head>
 <body>
     <script>
-        function getComputerChoice(max){
-        let randomNumber = Math.floor(Math.random()*max)+1
-            if(randomNumber === 1){
-                return console.log("Paper!");
-            }
-            else if(randomNumber === 2){
-                return console.log("Scissors!");
-            }else{
-                return console.log("Rock!"); 
-            }
+       function computerSelection(){
+            let randomNumber = Math.floor(Math.random()*3)+1
+            let computer = randomNumber === 1 ? "paper"
+            : randomNumber === 2 ? "scissors"
+            : "rock";
+            return computer
         }
-        getComputerChoice(3)
+        let playerSelection = window.prompt("Choose between Rock, Paper, Scissors.").toLowerCase()
         
-        function playerSelection(){
-           let playerPlays = window.prompt("Choose between Rock, Paper, Scissors.").toLowerCase()
-           console.log(playerPlays);
-        }
-        playerSelection()
-        function gameRound(getComputerChoice(3), playerSelection){
-            if(){
-
+        
+        
+        function gameRound(func, variable){
+            if(func === variable){
+                console.log("Player: "+variable);
+                console.log("computer: "+func);
+                console.log("Draw!");
+            }
+            else if(func === "rock" && variable === "paper"){
+                console.log("Player: "+variable);
+                console.log("computer: "+func);
+                console.log("Player wins!");
+            }
+            else if(func === "scissors" && variable === "paper"){
+                console.log("Player: "+variable);
+                console.log("computer: "+func);
+                console.log("Computer wins!");
             }
         }
+        gameRound(computerSelection(), playerSelection) 
     </script>
 </body>
 </html>
