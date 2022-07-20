@@ -15,51 +15,59 @@
             : "rock";
             return computer
         }
-        let playerSelection = window.prompt("Choose between Rock, Paper, Scissors.").toLowerCase()
         
         
-        
-        function gameRound(func, variable){
-            if(func === variable){
-                console.log("Player: "+variable);
+        function gameRound(func){
+            let playerSelection = window.prompt("Choose between Rock, Paper, Scissors.").toLowerCase()
+            if(func === playerSelection){
+            
+                console.log("Player: "+playerSelection);
                 console.log("computer: "+func);
                 console.log("Draw!");
             }
-            else if(func === "rock" && variable === "paper"){
-                console.log("Player: "+variable);
+            else if(func === "rock" && playerSelection === "paper"){
+                console.log("Player: "+playerSelection);
                 console.log("computer: "+func);
                 console.log("Player wins!");
             }
-            else if(func === "scissors" && variable === "paper"){
-                console.log("Player: "+variable);
+            else if(func === "scissors" && playerSelection === "paper"){
+                console.log("Player: "+playerSelection);
                 console.log("computer: "+func);
                 console.log("Computer wins!");
             }
 
-            else if(func === "paper" && variable === "scissors"){
-                console.log("Player: "+variable);
+            else if(func === "paper" && playerSelection === "scissors"){
+                console.log("Player: "+playerSelection);
                 console.log("computer: "+func);
                 console.log("Player wins!");
             }
-            else if(func === "rock" && variable === "scissors"){
-                console.log("Player: "+variable);
+            else if(func === "rock" && playerSelection === "scissors"){
+                console.log("Player: "+playerSelection);
                 console.log("computer: "+func);
                 console.log("Computer wins!");
             }
 
-            else if(func === "scissors" && variable === "rock"){
-                console.log("Player: "+variable);
+            else if(func === "scissors" && playerSelection === "rock"){
+                console.log("Player: "+playerSelection);
                 console.log("computer: "+func);
                 console.log("Player wins!");
             }
-            else if(func === "paper" && variable === "rock"){
-                console.log("Player: "+variable);
+            else if(func === "paper" && playerSelection === "rock"){
+                console.log("Player: "+playerSelection);
                 console.log("computer: "+func);
                 console.log("Computer wins!");
             }
-
+            return
         }
-        gameRound(computerSelection(), playerSelection) 
+
+        function game(){
+        for(let i = 1; i < 6; i++){
+        console.log("Round "+i+"!")
+        gameRound()
+        }
+        console.log("The game has finished!")
+        }
+        game()
     </script>
 </body>
 </html>
