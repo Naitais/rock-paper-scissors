@@ -9,61 +9,58 @@
 <body>
     <script>
        function computerSelection(){
-            let randomNumber = Math.floor(Math.random()*3)+1
-            let computer = randomNumber === 1 ? "paper"
-            : randomNumber === 2 ? "scissors"
-            : "rock";
-            return computer
-        }
-        
-        
-        function gameRound(func){
-            let playerSelection = window.prompt("Choose between Rock, Paper, Scissors.").toLowerCase()
-            if(func === playerSelection){
             
-                console.log("Player: "+playerSelection);
-                console.log("computer: "+func);
-                console.log("Draw!");
+            let randomNumber = Math.floor(Math.random()*3)+1
+            let computer = randomNumber
+            if(randomNumber === 1){
+               computer = "paper" 
+            }else if(randomNumber === 2){
+                computer = "scissors"
+            }else if(randomNumber === 3){
+                computer = "rock"
             }
-            else if(func === "rock" && playerSelection === "paper"){
-                console.log("Player: "+playerSelection);
-                console.log("computer: "+func);
-                console.log("Player wins!");
-            }
-            else if(func === "scissors" && playerSelection === "paper"){
-                console.log("Player: "+playerSelection);
-                console.log("computer: "+func);
-                console.log("Computer wins!");
-            }
-
-            else if(func === "paper" && playerSelection === "scissors"){
-                console.log("Player: "+playerSelection);
-                console.log("computer: "+func);
-                console.log("Player wins!");
-            }
-            else if(func === "rock" && playerSelection === "scissors"){
-                console.log("Player: "+playerSelection);
-                console.log("computer: "+func);
-                console.log("Computer wins!");
-            }
-
-            else if(func === "scissors" && playerSelection === "rock"){
-                console.log("Player: "+playerSelection);
-                console.log("computer: "+func);
-                console.log("Player wins!");
-            }
-            else if(func === "paper" && playerSelection === "rock"){
-                console.log("Player: "+playerSelection);
-                console.log("computer: "+func);
-                console.log("Computer wins!");
-            }
-            return
+            return computer
+            
         }
+        function playerSelection(){
+            let player = window.prompt("Choose between Rock, Paper, Scissors.").toLowerCase()
+            return player
+        }
+        
+        function gameRound(func, func2){
+            let winner = "";
+            if(func === func2){
+                winner = "It is a draw!";
+            }
+            else if(func === "rock" && func2 === "paper"){
+                winner = func2+" beats "+func+" Player wins!";
+            }
+            else if(func === "scissors" && func2 === "paper"){
+                winner = func+" beats "+func2+" Computer wins!";
+            }
 
+            else if(func === "paper" && func2 === "scissors"){
+                winner = func2+" beats "+func+" Player wins!";
+            }
+            else if(func === "rock" && func2 === "scissors"){
+                winner = func+" beats "+func2+" Computer wins!";
+            }
+
+            else if(func === "scissors" && func2 === "rock"){
+                winner = func2+" beats "+func+" Player wins!";
+            }
+            else if(func === "paper" && func2 === "rock"){
+                winner = func+" beats "+func2+" Computer wins!";
+                
+            }
+            console.log(winner);
+            return winner
+            
+        }
         function game(){
         for(let i = 1; i < 6; i++){
         console.log("Round "+i+"!")
-        gameRound()
+        gameRound(computerSelection(), playerSelection())
         }
         console.log("The game has finished!")
         }
