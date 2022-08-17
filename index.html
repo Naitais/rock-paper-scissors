@@ -22,9 +22,16 @@
             return computer
             
         }
-        function playerSelection(){
-            let player = window.prompt("Choose between Rock, Paper, Scissors.").toLowerCase()
-            return player
+        function playerSelectionPaper(){
+            return "paper";
+        }
+
+        function playerSelectionScissors(){
+            return "scissors";
+        }
+
+        function playerSelectionRock(){
+            return "rock";
         }
         
         function gameRound(func, func2){
@@ -57,14 +64,37 @@
             return winner
             
         }
-        function game(){
+        /*function game(){
         for(let i = 1; i < 6; i++){
         console.log("Round "+i+"!")
         gameRound(computerSelection(), playerSelection())
         }
         console.log("The game has finished!")
         }
-        game()
+        game()*/
+        
+    const body = document.body;
+    
+    const buttonPaper = document.createElement("button")
+    body.append(buttonPaper)
+
+    const buttonScissors = document.createElement("button")
+    body.append(buttonScissors)
+
+    const buttonRock = document.createElement("button")
+    body.append(buttonRock)
+
+    buttonPaper.addEventListener("click", e =>  {
+        gameRound(computerSelection(), playerSelectionPaper());
+    })
+
+    buttonScissors.addEventListener("click", e =>  {
+        gameRound(computerSelection(), playerSelectionScissors());
+    })
+
+    buttonRock.addEventListener("click", e =>  {
+        gameRound(computerSelection(), playerSelectionRock());
+    })
     </script>
 </body>
 </html>
