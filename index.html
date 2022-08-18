@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="./css-stylesheet/css-stylesheet.css" >
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,34 @@
 </head>
 <body>
     <script>
-       function computerSelection(){
-            
-            let randomNumber = Math.floor(Math.random()*3)+1
+        const body = document.body;
+        const gameResults = document.createElement("div");
+        
+        body.append(gameResults);
+
+        const buttonPaper = document.createElement("button")
+        body.append(buttonPaper)
+        buttonPaper.id="paperButton"
+        
+        const buttonScissors = document.createElement("button")
+        body.append(buttonScissors)
+        buttonScissors.id="scissorsButton"
+
+        const buttonRock = document.createElement("button")
+        body.append(buttonRock)
+        buttonRock.id="rockButton"
+
+        
+
+      
+        document.getElementById("paperButton").addEventListener("click", gameRound)
+        document.getElementById("scissorsButton").addEventListener("click", gameRound)
+        document.getElementById("rockButton").addEventListener("click", gameRound)
+
+        function gameRound(e){
+        let winner;
+
+        let randomNumber = Math.floor(Math.random()*3)+1
             let computer = randomNumber
             if(randomNumber === 1){
                computer = "paper" 
@@ -19,82 +45,56 @@
             }else if(randomNumber === 3){
                 computer = "rock"
             }
-            return computer
-            
-        }
-        function playerSelectionPaper(){
-            return "paper";
-        }
-
-        function playerSelectionScissors(){
-            return "scissors";
-        }
-
-        function playerSelectionRock(){
-            return "rock";
-        }
         
-        function gameRound(func, func2){
-            let winner = "";
-            if(func === func2){
-                winner = "It is a draw!";
-            }
-            else if(func === "rock" && func2 === "paper"){
-                winner = func2+" beats "+func+" Player wins!";
-            }
-            else if(func === "scissors" && func2 === "paper"){
-                winner = func+" beats "+func2+" Computer wins!";
-            }
 
-            else if(func === "paper" && func2 === "scissors"){
-                winner = func2+" beats "+func+" Player wins!";
-            }
-            else if(func === "rock" && func2 === "scissors"){
-                winner = func+" beats "+func2+" Computer wins!";
-            }
+        let player;
+        
+            if(e.target.id=="paperButton"){
+                player="paper";
+                if(player === computer){
+                winner = "Player chooses "+player+" and computer chooses "+computer+" too! It is a draw!";
+                }else if(player === "paper" && computer === "scissors"){
+                winner = "Computer wins, "+computer+" beats "+player+".";
+                }else if(player === "paper" && computer === "rock"){
+                winner = "Player wins, "+player+" beats "+computer+".";
+                }
 
-            else if(func === "scissors" && func2 === "rock"){
-                winner = func2+" beats "+func+" Player wins!";
-            }
-            else if(func === "paper" && func2 === "rock"){
-                winner = func+" beats "+func2+" Computer wins!";
+                
+                
+
+            }else if(e.target.id=="scissorsButton"){
+                player="scissors";
+                if(player === computer){
+                winner = "Player chooses "+player+" and computer chooses "+computer+" too! It is a draw!";
+                }else if(player === "scissors" && computer === "paper"){
+                winner = "Player wins, "+player+" beats "+computer+".";
+                }else if(player === "scissors" && computer === "rock"){
+                winner = "Computer wins, "+computer+" beats "+player+".";;
+                }
+
+                
+                
+
+            }else if(e.target.id=="rockButton"){
+                player="rock";
+                if(player === computer){
+                winner = "Player chooses "+player+" and computer chooses "+computer+" too! It is a draw!";
+                }else if(player === "rock" && computer === "paper"){
+                winner = "Computer wins, "+computer+" beats "+player+".";;
+                }else if(player === "rock" && computer === "scissors"){
+                winner = "Player wins, "+player+" beats "+computer+".";
+                }
+                
                 
             }
-            console.log(winner);
-            return winner
+            
+            return gameResults.textContent=winner
+
             
         }
-        /*function game(){
-        for(let i = 1; i < 6; i++){
-        console.log("Round "+i+"!")
-        gameRound(computerSelection(), playerSelection())
-        }
-        console.log("The game has finished!")
-        }
-        game()*/
         
-    const body = document.body;
-    
-    const buttonPaper = document.createElement("button")
-    body.append(buttonPaper)
-
-    const buttonScissors = document.createElement("button")
-    body.append(buttonScissors)
-
-    const buttonRock = document.createElement("button")
-    body.append(buttonRock)
-
-    buttonPaper.addEventListener("click", e =>  {
-        gameRound(computerSelection(), playerSelectionPaper());
-    })
-
-    buttonScissors.addEventListener("click", e =>  {
-        gameRound(computerSelection(), playerSelectionScissors());
-    })
-
-    buttonRock.addEventListener("click", e =>  {
-        gameRound(computerSelection(), playerSelectionRock());
-    })
+        
+   
     </script>
 </body>
 </html>
