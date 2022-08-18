@@ -10,31 +10,44 @@
 <body>
     <script>
         const body = document.body;
+
         const gameResults = document.createElement("div");
-        
         body.append(gameResults);
 
+        const buttonContainer = document.createElement("div")
+        body.append(buttonContainer)
+        buttonContainer.id="btnContainer"
+
         const buttonPaper = document.createElement("button")
-        body.append(buttonPaper)
+        buttonContainer.append(buttonPaper)
         buttonPaper.id="paperButton"
         
+        const paperImg =document.createElement("img")
+        paperImg.src="./images/paper.jpg"
+        buttonPaper.append(paperImg)
+        paperImg.id="paper"
+        
         const buttonScissors = document.createElement("button")
-        body.append(buttonScissors)
+        buttonContainer.append(buttonScissors)
         buttonScissors.id="scissorsButton"
 
+        const scissorsImg =document.createElement("img")
+        scissorsImg.src="./images/scissors.jpg"
+        buttonScissors.append(scissorsImg)
+        scissorsImg.id="scissors"
+
         const buttonRock = document.createElement("button")
-        body.append(buttonRock)
+        buttonContainer.append(buttonRock)
         buttonRock.id="rockButton"
 
-        
+        const rockImg =document.createElement("img")
+        rockImg.src="./images/hqdefault.jpg"
+        buttonRock.append(rockImg)
+        rockImg.id="rock"
 
-      
-        document.getElementById("paperButton").addEventListener("click", gameRound)
-        document.getElementById("scissorsButton").addEventListener("click", gameRound)
-        document.getElementById("rockButton").addEventListener("click", gameRound)
-
-        function gameRound(e){
-        let winner;
+        function gameRound(){
+            btnContainer.addEventListener("click",(e)=>{
+            let winner;
 
         let randomNumber = Math.floor(Math.random()*3)+1
             let computer = randomNumber
@@ -49,7 +62,7 @@
 
         let player;
         
-            if(e.target.id=="paperButton"){
+            if(e.target.id=="paper"||e.target.id=="paperButton"){
                 player="paper";
                 if(player === computer){
                 winner = "Player chooses "+player+" and computer chooses "+computer+" too! It is a draw!";
@@ -62,7 +75,7 @@
                 
                 
 
-            }else if(e.target.id=="scissorsButton"){
+            }else if(e.target.id=="scissors"||e.target.id=="scissorsButton"){
                 player="scissors";
                 if(player === computer){
                 winner = "Player chooses "+player+" and computer chooses "+computer+" too! It is a draw!";
@@ -75,7 +88,7 @@
                 
                 
 
-            }else if(e.target.id=="rockButton"){
+            }else if(e.target.id=="rock"||e.target.id=="rockButton"){
                 player="rock";
                 if(player === computer){
                 winner = "Player chooses "+player+" and computer chooses "+computer+" too! It is a draw!";
@@ -90,8 +103,12 @@
             
             return gameResults.textContent=winner
 
-            
+        })
         }
+       
+      
+
+        
         
         
    
