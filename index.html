@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock, Paper, Scissors</title>
 </head>
 <body>
     <script>
@@ -14,9 +14,34 @@
         const gameResults = document.createElement("div");
         body.append(gameResults);
 
+       
         const buttonContainer = document.createElement("div")
         body.append(buttonContainer)
         buttonContainer.id="btnContainer"
+
+        const playersSelectionsCont =document.createElement("div");
+        body.append(playersSelectionsCont)
+        playersSelectionsCont.id="selectionsContainer"
+
+        const playerSelection=document.createElement("p");
+        playersSelectionsCont.append(playerSelection)
+        playerSelection.id="playerSelection"
+
+
+        const computerSelection=document.createElement("p");
+        playersSelectionsCont.append(computerSelection)
+        computerSelection.id="computerSelection"
+
+        const gameScore=document.createElement("div");
+        body.append(gameScore)
+        gameScore.id="scoreContainer"
+
+        const gameScorePlayer=document.createElement("p");
+        gameScore.append(gameScorePlayer)
+
+
+        const gameScoreComputer=document.createElement("p");
+        gameScore.append(gameScoreComputer)
 
         const buttonPaper = document.createElement("button")
         buttonContainer.append(buttonPaper)
@@ -45,9 +70,38 @@
         buttonRock.append(rockImg)
         rockImg.id="rock"
 
-        function gameRound(){
+        let playerScore=0;
+        let winner;
+        let computerScore=0;
+        let playersSelections;
+
+        gameScorePlayer.textContent="Player Score: 0"
+        gameScoreComputer.textContent="Computer Score: 0"
+        gameResults.textContent="Round results: ... "
+        computerSelection.textContent="Computer chooses: ..."
+        playerSelection.textContent="Player chooses: ..."
+
+        
+
+        function scoreCounter(winner){
+            if(winner === "player" && winner!=="draw"){
+                playerScore++;
+                gameScorePlayer.textContent="Player Score: "+playerScore;  
+            }else if(winner==="computer" && winner!=="draw"){
+                computerScore++;
+                gameScoreComputer.textContent="Computer Score: "+computerScore;
+            }
+           
+            return playerScore
+        }
+
+    
+        function gameRound(winner){
+           
             btnContainer.addEventListener("click",(e)=>{
-            let winner;
+            
+        computerSelection.textContent="Computer chooses: ..."
+        playerSelection.textContent="Player chooses: ..."
 
         let randomNumber = Math.floor(Math.random()*3)+1
             let computer = randomNumber
@@ -59,59 +113,75 @@
                 computer = "rock"
             }
         
-
         let player;
         
             if(e.target.id=="paper"||e.target.id=="paperButton"){
                 player="paper";
                 if(player === computer){
-                winner = "Player chooses "+player+" and computer chooses "+computer+" too! It is a draw!";
+                winner = "draw";
+                computerSelection.textContent="Computer chooses: Paper!"
+                playerSelection.textContent="Player chooses: Paper!"
+                
                 }else if(player === "paper" && computer === "scissors"){
-                winner = "Computer wins, "+computer+" beats "+player+".";
+                winner = "computer";
+                computerSelection.textContent="Computer chooses: Scissors!"
+                playerSelection.textContent="Player chooses: Paper!"
+                
                 }else if(player === "paper" && computer === "rock"){
-                winner = "Player wins, "+player+" beats "+computer+".";
+                winner = "player";
+                computerSelection.textContent="Computer chooses: Rock!"
+                playerSelection.textContent="Player chooses: Paper!"
+                
                 }
-
-                
-                
 
             }else if(e.target.id=="scissors"||e.target.id=="scissorsButton"){
                 player="scissors";
                 if(player === computer){
-                winner = "Player chooses "+player+" and computer chooses "+computer+" too! It is a draw!";
+                winner = "draw";
+                computerSelection.textContent="Computer chooses: Scissors!"
+                playerSelection.textContent="Player chooses: Scissors!"
+                
                 }else if(player === "scissors" && computer === "paper"){
-                winner = "Player wins, "+player+" beats "+computer+".";
+                winner = "player";
+                computerSelection.textContent="Computer chooses: Paper!"
+                playerSelection.textContent="Player chooses: Scissors!"
+                
                 }else if(player === "scissors" && computer === "rock"){
-                winner = "Computer wins, "+computer+" beats "+player+".";;
+                winner = "computer";
+                computerSelection.textContent="Computer chooses: Rock!"
+                playerSelection.textContent="Player chooses: Scissors!"
+                
                 }
-
-                
-                
 
             }else if(e.target.id=="rock"||e.target.id=="rockButton"){
                 player="rock";
                 if(player === computer){
-                winner = "Player chooses "+player+" and computer chooses "+computer+" too! It is a draw!";
+                winner = "draw";
+                computerSelection.textContent="Computer chooses: Rock!"
+                playerSelection.textContent="Player chooses: Rock!"
+               
                 }else if(player === "rock" && computer === "paper"){
-                winner = "Computer wins, "+computer+" beats "+player+".";;
+                winner = "computer";
+                computerSelection.textContent="Computer chooses: Paper!"
+                playerSelection.textContent="Player chooses: Rock!"
+                
                 }else if(player === "rock" && computer === "scissors"){
-                winner = "Player wins, "+player+" beats "+computer+".";
+                winner = "player";
+                computerSelection.textContent="Computer chooses: Scissors!"
+                playerSelection.textContent="Player chooses: Rock!"
+                
                 }
-                
-                
             }
-            
-            return gameResults.textContent=winner
-
+            scoreCounter(winner)
+            if(winner ==="computer" || winner ==="player"){
+                gameResults.textContent="Round results: The winner is the "+winner+"!";
+            }else{
+                gameResults.textContent="Round results: It is a draw!"
+            }
         })
-        }
-       
-      
-
-        
-        
-        
-   
+    }
+    gameRound(winner)
+    
     </script>
 </body>
 </html>
