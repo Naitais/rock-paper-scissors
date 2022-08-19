@@ -19,8 +19,12 @@
         body.append(buttonContainer)
         buttonContainer.id="btnContainer"
 
+        const gameContent =document.createElement("div")
+        body.append(gameContent)
+        gameContent.id="gameCont"
+
         const playersSelectionsCont =document.createElement("div");
-        body.append(playersSelectionsCont)
+        gameContent.append(playersSelectionsCont)
         playersSelectionsCont.id="selectionsContainer"
 
         const playerSelection=document.createElement("p");
@@ -33,7 +37,7 @@
         computerSelection.id="computerSelection"
 
         const gameScore=document.createElement("div");
-        body.append(gameScore)
+        gameContent.append(gameScore)
         gameScore.id="scoreContainer"
 
         const gameScorePlayer=document.createElement("p");
@@ -74,6 +78,7 @@
         let winner;
         let computerScore=0;
         let playersSelections;
+        let round;
 
         gameScorePlayer.textContent="Player Score: 0"
         gameScoreComputer.textContent="Computer Score: 0"
@@ -82,7 +87,14 @@
         playerSelection.textContent="Player chooses: ..."
 
         
-
+        function gameScoreCounter(){
+        if(computerScore===5){
+            gameResults.textContent="The game has finished! Computer wins the game!";
+        }else if(playerScore===5){
+            gameResults.textContent="The game has finished! Player wins the game!";
+        }
+        
+        }
         function scoreCounter(winner){
             if(winner === "player" && winner!=="draw"){
                 playerScore++;
@@ -172,15 +184,19 @@
                 
                 }
             }
+            
             scoreCounter(winner)
             if(winner ==="computer" || winner ==="player"){
                 gameResults.textContent="Round results: The winner is the "+winner+"!";
             }else{
                 gameResults.textContent="Round results: It is a draw!"
             }
+            gameScoreCounter()
         })
     }
-    gameRound(winner)
+    
+        
+        gameRound()
     
     </script>
 </body>

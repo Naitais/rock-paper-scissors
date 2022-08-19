@@ -31,3 +31,20 @@ button{
 img{
     height: 100%;
 }
+
+#gameCont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30%;
+}
+
+#selectionsContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+#scoreContainer{
+    display: flex;
+    flex-direction: column;
+}
