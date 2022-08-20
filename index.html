@@ -5,23 +5,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock, Paper, Scissors</title>
+    <title>Rock Paper Scissors</title>
 </head>
 <body>
     <script>
         const body = document.body;
 
-        const gameResults = document.createElement("div");
-        body.append(gameResults);
+        const titleScreenContainer = document.createElement("div");
+        body.append(titleScreenContainer);
+        titleScreenContainer.id="titleScreenContainer"
+
+        const gameTitle = document.createElement("h1");
+        titleScreenContainer.append(gameTitle);
+        gameTitle.textContent="Rock Paper Scissors!"
+
+        const gameSubTitle = document.createElement("h2");
+        titleScreenContainer.append(gameSubTitle);
+        gameSubTitle.textContent="Can you beat the computer in this simple game?"
+
+        const gameInstructions = document.createElement("p");
+        titleScreenContainer.append(gameInstructions);
+        gameInstructions.textContent="Win FIVE rounds of Rock Paper Scissors against the computer to win the game!"
+
+        const startButton = document.createElement("button");
+        titleScreenContainer.append(startButton);
+        startButton.textContent="START GAME"
+
+        const gameContainer = document.createElement("div");
+        body.append(gameContainer);
+        gameContainer.id="gameContainer"
+        gameContainer.style.display="none";
+
+        const gameResults = document.createElement("h2");
+        gameContainer.append(gameResults);
 
        
         const buttonContainer = document.createElement("div")
-        body.append(buttonContainer)
+        gameContainer.append(buttonContainer)
         buttonContainer.id="btnContainer"
 
         const gameContent =document.createElement("div")
-        body.append(gameContent)
+        gameContainer.append(gameContent)
         gameContent.id="gameCont"
+        
 
         const playersSelectionsCont =document.createElement("div");
         gameContent.append(playersSelectionsCont)
@@ -47,9 +73,14 @@
         const gameScoreComputer=document.createElement("p");
         gameScore.append(gameScoreComputer)
 
+        const resetButton=document.createElement("button");
+        gameContainer.append(resetButton);
+        resetButton.textContent="RESET GAME"
+
         const buttonPaper = document.createElement("button")
         buttonContainer.append(buttonPaper)
         buttonPaper.id="paperButton"
+        buttonPaper.classList.add("chooseButton")
         
         const paperImg =document.createElement("img")
         paperImg.src="./images/paper.jpg"
@@ -59,6 +90,7 @@
         const buttonScissors = document.createElement("button")
         buttonContainer.append(buttonScissors)
         buttonScissors.id="scissorsButton"
+        buttonScissors.classList.add("chooseButton")
 
         const scissorsImg =document.createElement("img")
         scissorsImg.src="./images/scissors.jpg"
@@ -68,6 +100,7 @@
         const buttonRock = document.createElement("button")
         buttonContainer.append(buttonRock)
         buttonRock.id="rockButton"
+        buttonRock.classList.add("chooseButton")
 
         const rockImg =document.createElement("img")
         rockImg.src="./images/hqdefault.jpg"
@@ -78,23 +111,24 @@
         let winner;
         let computerScore=0;
         let playersSelections;
-        let round;
+        let round=1;
+
+        function gameScoreCounter(){
+                round++;
+                if(computerScore===5){
+                    gameResults.textContent="The game has finished! Computer wins the game!";
+                }else if(playerScore===5){
+                    gameResults.textContent="The game has finished! Player wins the game!";
+                    }
+                }
 
         gameScorePlayer.textContent="Player Score: 0"
         gameScoreComputer.textContent="Computer Score: 0"
-        gameResults.textContent="Round results: ... "
+        gameResults.textContent="Round "+round+" results: ... "
         computerSelection.textContent="Computer chooses: ..."
         playerSelection.textContent="Player chooses: ..."
 
-        
-        function gameScoreCounter(){
-        if(computerScore===5){
-            gameResults.textContent="The game has finished! Computer wins the game!";
-        }else if(playerScore===5){
-            gameResults.textContent="The game has finished! Player wins the game!";
-        }
-        
-        }
+          
         function scoreCounter(winner){
             if(winner === "player" && winner!=="draw"){
                 playerScore++;
@@ -107,14 +141,23 @@
             return playerScore
         }
 
-    
-        function gameRound(winner){
-           
-            btnContainer.addEventListener("click",(e)=>{
-            
-        computerSelection.textContent="Computer chooses: ..."
-        playerSelection.textContent="Player chooses: ..."
+        function gameStart(){
+            startButton.addEventListener("click", (e)=>{
+                
+                titleScreenContainer.style.display="none";
+                gameContainer.removeAttribute("style");
+            })
+        }
 
+        function gameReset(){
+            resetButton.addEventListener("click", (e)=>{
+                gameContainer.style.display="none";
+                titleScreenContainer.removeAttribute("style");
+            })
+        }
+
+        function gameRound(winner){
+            btnContainer.addEventListener("click",(e)=>{
         let randomNumber = Math.floor(Math.random()*3)+1
             let computer = randomNumber
             if(randomNumber === 1){
@@ -187,16 +230,17 @@
             
             scoreCounter(winner)
             if(winner ==="computer" || winner ==="player"){
-                gameResults.textContent="Round results: The winner is the "+winner+"!";
+                gameResults.textContent="Round "+round+" results: The winner is the "+winner+"!";
             }else{
-                gameResults.textContent="Round results: It is a draw!"
+                gameResults.textContent="Round "+round+" results: It is a draw!"
             }
             gameScoreCounter()
         })
     }
     
-        
+        gameStart()
         gameRound()
+        gameReset()
     
     </script>
 </body>
