@@ -8,6 +8,8 @@ NEXT
 
 4) ADD FUNNY GIFS/SOUNDS WHEN GAME ENDS (ideally add some for when the player wins and then some for when the player loses, maybe make it random using an array or random number so that it is not always the same gif/sound).
 
+5) ADD A SEPARATE SECTION AT THE RIGHT OF THE PLAYER BUTTONS SO THAT PLAYER CAN SEE A PICTURE OF THE COMPUTER'S SELECTION. THIS NEW DIV SHOULD GO IN THE SAME DIV WHERE PLAYER BUTTONS ARE LOCATED.
+
 
 
 DELETE THIS TEXT FILE AFTER APLYING CHANGES
