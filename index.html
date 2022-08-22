@@ -42,12 +42,11 @@
        
         const buttonContainer = document.createElement("div")
         gameContainer.append(buttonContainer)
-        buttonContainer.id="btnContainer"
+        buttonContainer.id="mainButtonsCont"
 
         const gameContent =document.createElement("div")
-        gameContainer.append(gameContent)
-        gameContent.id="gameCont"
         
+        gameContent.id="gameCont"
 
         const playersSelectionsCont =document.createElement("div");
         gameContent.append(playersSelectionsCont)
@@ -74,11 +73,23 @@
         gameScore.append(gameScoreComputer)
 
         const resetButton=document.createElement("button");
-        gameContainer.append(resetButton);
-        resetButton.textContent="RESET GAME"
+        
+        resetButton.textContent="GO TO MENU"
+
+        const playerButtons=document.createElement("div");
+        buttonContainer.append(playerButtons);
+        playerButtons.id="btnContainer"
+
+        const computerChoose=document.createElement("div");
+        
+        computerChoose.id="computerChoose"
+
+        const computerAvatar=document.createElement("img");
+        computerChoose.append(computerAvatar);
+        computerAvatar.src="./images/karenComputer.png"
 
         const buttonPaper = document.createElement("button")
-        buttonContainer.append(buttonPaper)
+        playerButtons.append(buttonPaper)
         buttonPaper.id="paperButton"
         buttonPaper.classList.add("chooseButton")
         
@@ -87,8 +98,17 @@
         buttonPaper.append(paperImg)
         paperImg.id="paper"
         
+        const paperImgCopy=document.createElement("img");
+        paperImgCopy.src="./images/paper.jpg";
+
+        const scissorsImgCopy=document.createElement("img");
+        scissorsImgCopy.src="./images/scissors.jpg";
+
+        const rockImgCopy=document.createElement("img");
+        rockImgCopy.src="./images/hqdefault.jpg";
+
         const buttonScissors = document.createElement("button")
-        buttonContainer.append(buttonScissors)
+        playerButtons.append(buttonScissors)
         buttonScissors.id="scissorsButton"
         buttonScissors.classList.add("chooseButton")
 
@@ -98,7 +118,7 @@
         scissorsImg.id="scissors"
 
         const buttonRock = document.createElement("button")
-        buttonContainer.append(buttonRock)
+        playerButtons.append(buttonRock)
         buttonRock.id="rockButton"
         buttonRock.classList.add("chooseButton")
 
@@ -107,18 +127,66 @@
         buttonRock.append(rockImg)
         rockImg.id="rock"
 
+        const playersChoosePics=document.createElement("div");
+        buttonContainer.append(playersChoosePics);
+        playersChoosePics.id="playersPics";
+
+        const playerPicDiv=document.createElement("div");
+        playersChoosePics.append(playerPicDiv);
+
+        const computerPicDiv=document.createElement("div");
+        playersChoosePics.append(computerPicDiv);
+
+        playerButtons.append(computerChoose);
+
+        buttonContainer.append(gameContent);
+
+        buttonContainer.append(resetButton);
+
+        const gameFinishScreen=document.createElement("div");
+        body.append(gameFinishScreen);
+        gameFinishScreen.style.display="none";
+        gameFinishScreen.id="gameFinishScreen";
+
+        const endGameText=document.createElement("h2");
+        gameFinishScreen.append(endGameText);
+
+        const computerPaper=document.createElement("img");
+        computerPaper.src="./images/computerPaper.jpg"
+        
+        const computerScissors=document.createElement("img");
+        computerScissors.src="./images/computerScissors.jpg"
+
+        const computerRock=document.createElement("img");
+        computerRock.src="./images/computerRock.jpg"
+
+        gameContent.append(resetButton);
+        
+        
+            
+        
+
         let playerScore=0;
         let winner;
         let computerScore=0;
         let playersSelections;
         let round=1;
+        
 
         function gameScoreCounter(){
                 round++;
                 if(computerScore===5){
                     gameResults.textContent="The game has finished! Computer wins the game!";
+                    gameContainer.style.display="none";
+                    gameFinishScreen.removeAttribute("style");
+
+                    endGameText.textContent="You lost against the computer, better luck next time."
                 }else if(playerScore===5){
                     gameResults.textContent="The game has finished! Player wins the game!";
+                    gameContainer.style.display="none";
+                    gameFinishScreen.removeAttribute("style");
+
+                    endGameText.textContent="You won against the computer! Good job ;)."
                     }
                 }
 
@@ -141,6 +209,18 @@
             return playerScore
         }
 
+        function paperPlayerPic(){
+            
+            playerPicDiv.append(paperImgCopy);
+        }
+
+        function scissorsPlayerPic(){
+            playerPicDiv.append(scissorsImgCopy);
+        }
+        function rockPlayerPic(){
+            playerPicDiv.append(rockImgCopy);
+        }
+
         function gameStart(){
             startButton.addEventListener("click", (e)=>{
                 
@@ -153,6 +233,7 @@
             resetButton.addEventListener("click", (e)=>{
                 gameContainer.style.display="none";
                 titleScreenContainer.removeAttribute("style");
+                
             })
         }
 
@@ -161,11 +242,14 @@
         let randomNumber = Math.floor(Math.random()*3)+1
             let computer = randomNumber
             if(randomNumber === 1){
-               computer = "paper" 
+               computer = "paper"
+               computerPicDiv.append(computerPaper)
             }else if(randomNumber === 2){
                 computer = "scissors"
+                computerPicDiv.append(computerScissors)
             }else if(randomNumber === 3){
                 computer = "rock"
+                computerPicDiv.append(computerRock)
             }
         
         let player;
@@ -175,17 +259,21 @@
                 if(player === computer){
                 winner = "draw";
                 computerSelection.textContent="Computer chooses: Paper!"
+                
                 playerSelection.textContent="Player chooses: Paper!"
+                paperPlayerPic()
                 
                 }else if(player === "paper" && computer === "scissors"){
                 winner = "computer";
                 computerSelection.textContent="Computer chooses: Scissors!"
                 playerSelection.textContent="Player chooses: Paper!"
+                paperPlayerPic()
                 
                 }else if(player === "paper" && computer === "rock"){
                 winner = "player";
                 computerSelection.textContent="Computer chooses: Rock!"
                 playerSelection.textContent="Player chooses: Paper!"
+                paperPlayerPic()
                 
                 }
 
@@ -195,17 +283,19 @@
                 winner = "draw";
                 computerSelection.textContent="Computer chooses: Scissors!"
                 playerSelection.textContent="Player chooses: Scissors!"
+                scissorsPlayerPic()
                 
                 }else if(player === "scissors" && computer === "paper"){
                 winner = "player";
                 computerSelection.textContent="Computer chooses: Paper!"
                 playerSelection.textContent="Player chooses: Scissors!"
+                scissorsPlayerPic()
                 
                 }else if(player === "scissors" && computer === "rock"){
                 winner = "computer";
                 computerSelection.textContent="Computer chooses: Rock!"
                 playerSelection.textContent="Player chooses: Scissors!"
-                
+                scissorsPlayerPic()
                 }
 
             }else if(e.target.id=="rock"||e.target.id=="rockButton"){
@@ -214,16 +304,19 @@
                 winner = "draw";
                 computerSelection.textContent="Computer chooses: Rock!"
                 playerSelection.textContent="Player chooses: Rock!"
+                rockPlayerPic()
                
                 }else if(player === "rock" && computer === "paper"){
                 winner = "computer";
                 computerSelection.textContent="Computer chooses: Paper!"
                 playerSelection.textContent="Player chooses: Rock!"
+                rockPlayerPic()
                 
                 }else if(player === "rock" && computer === "scissors"){
                 winner = "player";
                 computerSelection.textContent="Computer chooses: Scissors!"
                 playerSelection.textContent="Player chooses: Rock!"
+                rockPlayerPic()
                 
                 }
             }
@@ -235,6 +328,7 @@
                 gameResults.textContent="Round "+round+" results: It is a draw!"
             }
             gameScoreCounter()
+            
         })
     }
     
