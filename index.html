@@ -134,8 +134,20 @@
         const playerPicDiv=document.createElement("div");
         playersChoosePics.append(playerPicDiv);
 
+        const playerList=document.createElement("ul");
+        playerPicDiv.append(playerList);
+        playerList.classList.add("list");
+        listChild=document.createElement("li");
+        playerList.append(listChild);
+
         const computerPicDiv=document.createElement("div");
         playersChoosePics.append(computerPicDiv);
+
+        const computerList=document.createElement("ul");
+        computerPicDiv.append(computerList);
+        computerList.classList.add("list");
+        listChildCom=document.createElement("li");
+        computerList.append(listChildCom);
 
         playerButtons.append(computerChoose);
 
@@ -192,7 +204,7 @@
 
         gameScorePlayer.textContent="Player Score: 0"
         gameScoreComputer.textContent="Computer Score: 0"
-        gameResults.textContent="Round "+round+" results: ... "
+        gameResults.textContent="Click the buttons to play!"
         computerSelection.textContent="Computer chooses: ..."
         playerSelection.textContent="Player chooses: ..."
 
@@ -208,17 +220,27 @@
            
             return playerScore
         }
-
+        
         function paperPlayerPic(){
-            
-            playerPicDiv.append(paperImgCopy);
+
+            listChild.remove();
+            listChild=document.createElement("li");
+            playerList.append(listChild);
+            listChild.append(paperImgCopy);
         }
 
         function scissorsPlayerPic(){
-            playerPicDiv.append(scissorsImgCopy);
+            listChild.remove();
+            listChild=document.createElement("li");
+            playerList.append(listChild);
+            listChild.append(scissorsImgCopy);
         }
         function rockPlayerPic(){
-            playerPicDiv.append(rockImgCopy);
+            listChild.remove();
+            listChild=document.createElement("li");
+            playerList.append(listChild);
+            listChild.append(rockImgCopy);
+            
         }
 
         function gameStart(){
@@ -243,13 +265,24 @@
             let computer = randomNumber
             if(randomNumber === 1){
                computer = "paper"
-               computerPicDiv.append(computerPaper)
+               listChildCom.remove();
+                listChildCom=document.createElement("li");
+                computerList.append(listChildCom);
+                listChildCom.append(computerPaper);
+
+                
             }else if(randomNumber === 2){
                 computer = "scissors"
-                computerPicDiv.append(computerScissors)
+                listChildCom.remove();
+                listChildCom=document.createElement("li");
+                computerList.append(listChildCom);
+                listChildCom.append(computerScissors);
             }else if(randomNumber === 3){
                 computer = "rock"
-                computerPicDiv.append(computerRock)
+                listChildCom.remove();
+                listChildCom=document.createElement("li");
+                computerList.append(listChildCom);
+                listChildCom.append(computerRock);
             }
         
         let player;
