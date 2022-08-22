@@ -198,22 +198,13 @@
                     gameContainer.style.display="none";
                     gameFinishScreen.removeAttribute("style");
 
-                    
-
                     endGameText.textContent="You lost against the computer, better luck next time."
                 }else if(playerScore===5){
                     gameResults.textContent="Round "+round+" results: The winner is the "+winner+"!";
                     gameContainer.style.display="none";
                     gameFinishScreen.removeAttribute("style");
 
-
-
-                    
             }else{
-                
-
-                    
-
                     endGameText.textContent="You won against the computer! Good job ;)."
                     }
                     
@@ -289,15 +280,15 @@
         function gameContinue(){
             continueButton.addEventListener("click", (e)=>{
                 gameFinishScreen.style.display="none";
-                titleScreenContainer.removeAttribute("style");
-                    
-                    
+                titleScreenContainer.removeAttribute("style");    
                 
             })
         }
 
         function gameRound(winner){
             btnContainer.addEventListener("click",(e)=>{
+            console.log(e.bubbles, e.cancelBubble);
+            e.stopPropagation();
         let randomNumber = Math.floor(Math.random()*3)+1
             let computer = randomNumber
             if(randomNumber === 1){
@@ -306,9 +297,7 @@
                 listChildCom=document.createElement("li");
                 computerList.append(listChildCom);
                 listChildCom.append(computerPaper);
-                console.log(round);
-                console.log(computerScore);
-                console.log(playerScore);
+               
 
                 
             }else if(randomNumber === 2){
@@ -317,18 +306,14 @@
                 listChildCom=document.createElement("li");
                 computerList.append(listChildCom);
                 listChildCom.append(computerScissors);
-                console.log(round);
-                console.log(computerScore);
-                console.log(playerScore);
+               
             }else if(randomNumber === 3){
                 computer = "rock"
                 listChildCom.remove();
                 listChildCom=document.createElement("li");
                 computerList.append(listChildCom);
                 listChildCom.append(computerRock);
-                console.log(round);
-                console.log(computerScore);
-                console.log(playerScore);
+                
             }
         
         let player;

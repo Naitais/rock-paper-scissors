@@ -15,6 +15,8 @@ html,body
 #playersPics{
     display: flex;
     height: 15%;
+    margin-top: -260px;
+    margin-bottom: 25px;
     justify-content: center;
 
 }
@@ -30,10 +32,9 @@ body{
 }
 
 #mainButtonsCont{
-    height: auto;
+    
     display: flex;
     flex-direction: column;
-    
 }
 
 .list{
@@ -47,14 +48,12 @@ body{
 #btnContainer{
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+   
     
 }
 
 #computerChoose{
-    height: 60%;
-    
+    height: 50%;
 }
 
 .chooseButton{
