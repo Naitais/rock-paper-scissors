@@ -31,6 +31,8 @@
         titleScreenContainer.append(startButton);
         startButton.textContent="START GAME"
 
+        
+
         const gameContainer = document.createElement("div");
         body.append(gameContainer);
         gameContainer.id="gameContainer"
@@ -173,6 +175,10 @@
         computerRock.src="./images/computerRock.jpg"
 
         gameContent.append(resetButton);
+
+        const continueButton = document.createElement("button");
+        gameFinishScreen.append(continueButton);
+        continueButton.textContent="CONTINUE";
         
         
             
@@ -254,6 +260,14 @@
         function gameReset(){
             resetButton.addEventListener("click", (e)=>{
                 gameContainer.style.display="none";
+                titleScreenContainer.removeAttribute("style");
+                
+            })
+        }
+
+        function gameContinue(){
+            continueButton.addEventListener("click", (e)=>{
+                gameFinishScreen.style.display="none";
                 titleScreenContainer.removeAttribute("style");
                 
             })
@@ -368,6 +382,7 @@
         gameStart()
         gameRound()
         gameReset()
+        gameContinue()
     
     </script>
 </body>
