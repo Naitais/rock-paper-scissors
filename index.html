@@ -194,18 +194,29 @@
         function gameScoreCounter(){
                 round++;
                 if(computerScore===5){
-                    gameResults.textContent="The game has finished! Computer wins the game!";
+                    gameResults.textContent="Round "+round+" results: It is a draw!";
                     gameContainer.style.display="none";
                     gameFinishScreen.removeAttribute("style");
+
+                    
 
                     endGameText.textContent="You lost against the computer, better luck next time."
                 }else if(playerScore===5){
-                    gameResults.textContent="The game has finished! Player wins the game!";
+                    gameResults.textContent="Round "+round+" results: The winner is the "+winner+"!";
                     gameContainer.style.display="none";
                     gameFinishScreen.removeAttribute("style");
 
+
+
+                    
+            }else{
+                
+
+                    
+
                     endGameText.textContent="You won against the computer! Good job ;)."
                     }
+                    
                 }
 
         gameScorePlayer.textContent="Player Score: 0"
@@ -254,6 +265,16 @@
                 
                 titleScreenContainer.style.display="none";
                 gameContainer.removeAttribute("style");
+                round=1;
+                playerScore=0;
+                computerScore=0;
+                gameResults.textContent="Click the buttons to play!"
+                gameScorePlayer.textContent="Player Score: 0"
+                gameScoreComputer.textContent="Computer Score: 0"
+                computerSelection.textContent="Computer chooses: ..."
+                playerSelection.textContent="Player chooses: ..."
+                listChild.remove();
+                listChildCom.remove();
             })
         }
 
@@ -264,11 +285,13 @@
                 
             })
         }
-
+        
         function gameContinue(){
             continueButton.addEventListener("click", (e)=>{
                 gameFinishScreen.style.display="none";
                 titleScreenContainer.removeAttribute("style");
+                    
+                    
                 
             })
         }
@@ -283,6 +306,9 @@
                 listChildCom=document.createElement("li");
                 computerList.append(listChildCom);
                 listChildCom.append(computerPaper);
+                console.log(round);
+                console.log(computerScore);
+                console.log(playerScore);
 
                 
             }else if(randomNumber === 2){
@@ -291,12 +317,18 @@
                 listChildCom=document.createElement("li");
                 computerList.append(listChildCom);
                 listChildCom.append(computerScissors);
+                console.log(round);
+                console.log(computerScore);
+                console.log(playerScore);
             }else if(randomNumber === 3){
                 computer = "rock"
                 listChildCom.remove();
                 listChildCom=document.createElement("li");
                 computerList.append(listChildCom);
                 listChildCom.append(computerRock);
+                console.log(round);
+                console.log(computerScore);
+                console.log(playerScore);
             }
         
         let player;
@@ -377,6 +409,7 @@
             gameScoreCounter()
             
         })
+        
     }
     
         gameStart()
